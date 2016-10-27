@@ -1,5 +1,7 @@
 package com.violentstone.web;
 
+import org.springframework.stereotype.Controller;
+
 /**********************************************************
  * +茫茫人海与你相遇即是一种缘分,这让我不得不好好自我介绍一下
  * +吾名 "暴力的小石头/ViolentStone",吾乃一Java程序猿
@@ -8,5 +10,6 @@ package com.violentstone.web;
  * ********************************************************
  * +描述:
  *********************************************************/
+@Controller
 public class BlogController {
 }
