@@ -69,7 +69,7 @@ public class IBlogTest {
     @Test
     public void queryBlog() throws Exception {
 
-        Blog blog = iBlog.queryBlog(11);
+        Blog blog = iBlog.queryBlog(1);
         System.out.println(blog);
 
     }

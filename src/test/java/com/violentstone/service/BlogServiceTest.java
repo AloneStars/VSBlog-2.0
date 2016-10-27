@@ -1,6 +1,8 @@
 package com.violentstone.service;
 
 import com.violentstone.entity.Blog;
+import com.violentstone.entity.Comment;
+import com.violentstone.entity.Reply;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -8,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -77,6 +81,49 @@ public class BlogServiceTest {
     @Test
     public void queryDetails() throws Exception {
 
+        List<Blog> blogList = null;
+
+        blogList = blogService.queryDetails();
+
+        List<Comment> commentList = null;
+
+        List<Reply> replyList = null;
+
+        for (Blog blog : blogList) {
+
+            System.out.println(blog.toString());
+
+            commentList = blog.getCommentList();
+
+            if (commentList != null) {
+
+                System.out.println("该博客评论总数:" + commentList.size());
+
+                for (Comment comment : commentList) {
+
+                    System.out.println(comment.toString());
+
+                    replyList = comment.getReplyList();
+
+                    if( replyList != null) {
+
+                        System.out.println("该评论回复总数:" + replyList.size());
+
+                        for (Reply reply : replyList) {
+
+                            System.out.println("回复类容:" + reply.toString());
+
+                        }
+                    }else{
+                        System.out.println("该评论回复总数:0");
+                    }
+
+                }
+
+            }else{
+                System.out.println("该博客评论总数:0");
+            }
+        }
     }
 
 }

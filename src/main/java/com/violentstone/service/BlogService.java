@@ -2,6 +2,8 @@ package com.violentstone.service;
 
 import com.violentstone.dao.IBlog;
 import com.violentstone.entity.Blog;
+import com.violentstone.entity.Comment;
+import com.violentstone.entity.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +59,18 @@ public class BlogService implements IBlog {
     @Override
     public List<Blog> queryDetails() {
         List<Blog> blogList = iBlog.queryDetails();
+        for (Blog blog: blogList) {
+           List<Comment> commentList =  blog.getCommentList();
+            if((commentList.size()==1) && (commentList.get(0).isNull()))
+                blog.setCommentList(null);
+            else{
+                for (Comment comment:commentList) {
+                    List<Reply> replyList = comment.getReplyList();
+                    if((replyList.size()==1) && (replyList.get(0).isNull()))
+                        comment.setReplyList(null);
+                }
+            }
+        }
         return blogList;
     }
 }

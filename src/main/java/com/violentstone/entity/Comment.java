@@ -1,5 +1,7 @@
 package com.violentstone.entity;
 
+import com.violentstone.Util.Format;
+
 import java.util.List;
 
 public class Comment {
@@ -92,6 +94,16 @@ public class Comment {
 				+ ", questionContent=" + questionContent + ", blogId=" + blogId
 				+ "]";
 	}
-	
-	
+
+	/**
+	 * 判断该评论对象是否有效
+	 * @return
+     */
+	public boolean isNull(){
+		if((comId == 0 )&& !(Format.checkAllString(questioner,email,questionDate,questionContent)))
+			return true;
+		else
+			return false;
+	}
+
 }

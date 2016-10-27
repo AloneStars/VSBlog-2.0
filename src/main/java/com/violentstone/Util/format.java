@@ -3,7 +3,7 @@ package com.violentstone.Util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class format {
+public class Format {
 
 		/** 
 		* 检查 email输入是否正确 
@@ -28,7 +28,7 @@ public class format {
 		/** 
 		* 检查手机输入 是否正确 
 		* 
-		* @param value 
+		* @param mobiles
 		* @return 
 		*/ 
 		public static boolean checkMobile(String mobiles){
@@ -136,12 +136,11 @@ public class format {
 		*/ 
 		public static boolean checkNull(String value){ 
 		return value == null || "".equals(value.trim()); 
-		} 
-		
+		}
 		
 		/**
 		 * 检查所有的字符串是否都不为空, 都不为空:true,有任意一个为空:false.
-		 * @param 可变参数arg0
+		 * @param arg0
 		 * @return
 		 */
 		public static boolean checkAllString(String ...arg0){
@@ -152,4 +151,5 @@ public class format {
 			}
 			return true;			
 		}
+
 }

@@ -1,5 +1,7 @@
 package com.violentstone.entity;
 
+import com.violentstone.Util.Format;
+
 public class Reply {
 
 	//回复Id
@@ -70,7 +72,12 @@ public class Reply {
 				+ ", commentId=" + comId + "]";
 	}
 	
-	
+	public boolean isNull(){
+		if((rlyId == 0)&& !(Format.checkAllString(answer,answerDate,answerContent)))
+			return true;
+		else
+			return false;
+	}
 	
 	
 }

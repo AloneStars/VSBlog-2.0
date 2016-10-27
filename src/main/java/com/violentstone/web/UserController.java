@@ -34,7 +34,7 @@ import java.util.Date;
 @RequestMapping("/user")//url:/模块/资源/{id}/细分 /user/verify
 public class UserController {
 
-    private final Logger looger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public static Gson gson = new Gson();
 
@@ -57,7 +57,7 @@ public class UserController {
     @RequestMapping(value = "/verify/{verify}", method = RequestMethod.GET)
     public String verify(@PathVariable("verify") String verify,Model model){
 
-        looger.info("开始验证验证码");
+        logger.info("开始验证验证码");
         //3.通过动态口令获取用户信息
         User user = userService.checkUser(verify);
 
@@ -71,7 +71,7 @@ public class UserController {
     @RequestMapping(value = "/order/{order}", method = RequestMethod.GET)
     public String username(@PathVariable("order") String order,Model model){
 
-        looger.info("开始验证口令");
+        logger.info("开始验证口令");
         //1.验证口令是否正确
         if(userService.checkOrder(order)){
             /*
@@ -79,7 +79,7 @@ public class UserController {
              */
             verifyCode.setMsg(token.randToken());
 
-            looger.info("验证码信息："+verifyCode.toString());
+            logger.info("验证码信息："+verifyCode.toString());
 
             Send send = new Send("/email.properties");
 
