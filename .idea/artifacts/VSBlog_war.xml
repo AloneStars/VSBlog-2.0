@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="VSBlog:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="VSBlog.war">
+      <element id="artifact" artifact-name="VSBlog:war exploded" />
+    </root>
+  </artifact>
+</component>

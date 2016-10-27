@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.violentstone.dao.IBlog">
+
+  <resultMap type="Blog" id="Blog">
+    <id column="blog_id" jdbcType="INTEGER" property="blogId"/>
+    <result column="blog_img" jdbcType="VARCHAR" property="blogImg"/>
+    <result column="blog_title" jdbcType="VARCHAR" property="blogTitle"/>
+    <result column="publish_date" jdbcType="VARCHAR" property="publishDate"/>
+    <result column="author" jdbcType="VARCHAR" property="author"/>
+    <result column="tag" jdbcType="VARCHAR" property="tag"/>
+    <result column="blog_content" jdbcType="VARCHAR" property="blogContent"/>
+    <collection property="commentList" javaType="ArrayList" ofType="Comment"
+                resultMap="com.violentstone.dao.IComment.Comment"/>
+  </resultMap>
+
+  <insert id="addBlog" parameterType="Blog">
+      INSERT ignore INTO blog(blog_img,blog_title,publish_date,author,tag,blog_content) VALUES(#{blogImg},#{blogTitle},#{publishDate},#{author},#{tag},#{blogContent})
+  </insert>
+  
+  <delete id="delBlog" parameterType="INTEGER">
+      DELETE FROM blog 
+      <where>
+      	blog_id = #{_parameter}
+      </where>
+  </delete>
+  
+  <update id="updateBlog" parameterType="Blog">
+      UPDATE blog 
+      <set>
+      	 blog_img = #{blogImg} , blog_title = #{blogTitle} , publish_date = #{publishDate} , author = #{author} , tag = #{tag} , blog_content = #{blogContent}
+      </set>
+      <where>
+      	blog_id = #{blogId}
+      </where>
+  </update>
+
+  <select id="queryBlog" parameterType="int" resultMap="Blog">
+    SELECT blog_id,blog_img,blog_title,publish_date,author,tag,blog_content FROM blog
+    <where>
+    	blog_id = #{_parameter}
+    </where> 
+  </select>
+  
+  <select id="queryAllBlog"  resultMap="Blog">
+    SELECT blog_id,blog_img,blog_title,publish_date,author,tag,blog_content FROM blog
+  </select>
+  
+ <select id="queryDetails" parameterType="int" resultMap="Blog">
+     SELECT
+          B.blog_id,
+          B.blog_img,
+          B.blog_title,
+          B.publish_date,
+          B.author,
+          B.tag,
+          B.blog_content,
+          O.com_id,
+          O.questioner,
+          O.question_date,
+          O.email,
+          O.question_content,
+          O.blog_id,
+          R.rly_id,
+          R.answer,
+          R.answer_date,
+          R.answer_content,
+          R.com_id
+    FROM blog as B
+    LEFT JOIN comment as O ON  B.blog_id = O.blog_id
+    LEFT JOIN reply as R ON  O.com_id = R.com_id
+ </select>
+  
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.violentstone.dao.IReply">
+
+  <resultMap type="Reply" id="Reply">
+    <id column="rly_id" jdbcType="INTEGER" property="rlyId"/>
+    <result column="answer" jdbcType="VARCHAR" property="answer"/>
+    <result column="answer_date" jdbcType="VARCHAR" property="answerDate"/>   
+    <result column="answer_content" jdbcType="VARCHAR" property="answerContent"/>
+    <result column="com_id" jdbcType="INTEGER" property="comId"/>
+  </resultMap>
+  
+  <insert id="addReply" parameterType="Reply">
+      INSERT INTO reply(answer,answer_date,answer_content,com_id) VALUES(#{answer},#{answerDate},#{answerContent},#{comId})
+  </insert>
+  
+  <delete id="delReplyByRly" parameterType="INTEGER">
+      DELETE FROM reply WHERE rly_id = #{_parameter}
+  </delete>
+  
+  <delete id="delReplyByCom" parameterType="INTEGER">
+      DELETE FROM reply WHERE com_id = #{_parameter}
+  </delete>
+  
+  <update id="updateReply" parameterType="Reply">
+      UPDATE reply set answer = #{answer} , answer_date = #{answerDate} , answer_content = #{answerContent} , com_id = #{comId} WHERE rly_id = #{rlyId}
+  </update>
+  
+  <select id="queryReplyByRly" parameterType="int" resultMap="Reply">
+    SELECT rly_id,answer,answer_date,answer_content,com_id FROM reply WHERE rly_id = #{_parameter}
+  </select>
+  
+  <select id="queryReplyByCom" parameterType="int"  resultMap="Reply">
+    SELECT rly_id,answer,answer_date,answer_content,com_id FROM reply WHERE com_id = #{_parameter}
+  </select>
+  
+</mapper>

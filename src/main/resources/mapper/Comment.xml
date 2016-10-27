@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.violentstone.dao.IComment">
+
+  <resultMap type="Comment" id="Comment">
+    <id column="com_id" jdbcType="INTEGER" property="comId"/>
+    <result column="questioner" jdbcType="VARCHAR" property="questioner"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="question_date" jdbcType="VARCHAR" property="questionDate"/>   
+    <result column="question_content" jdbcType="VARCHAR" property="questionContent"/>
+    <result column="blog_id" jdbcType="INTEGER" property="blogId"/>
+    <collection property="replyList" javaType="ArrayList" ofType="Reply" resultMap="com.violentstone.dao.IReply.Reply"/>
+  </resultMap>
+  
+  <insert id="addComment" parameterType="Comment">
+      INSERT INTO comment(questioner,question_date,email,question_content,blog_id) VALUES(#{questioner},#{questionDate},#{email},#{questionContent},#{blogId})
+  </insert>
+  
+  <delete id="delCommentByCom" parameterType="INTEGER">
+      DELETE FROM comment WHERE com_id = #{_parameter}
+  </delete>
+  
+  <delete id="delCommentByBlog" parameterType="INTEGER">
+      DELETE FROM comment WHERE blog_id = #{_parameter}
+  </delete>
+  
+  <update id="updateComment" parameterType="Comment">
+      UPDATE comment set questioner = #{questioner} , question_date = #{questionDate} , email = #{email}, question_content = #{questionContent} , blog_id = #{blogId} WHERE com_id = #{comId}
+  </update>
+  
+  <select id="queryCommentByCom" parameterType="int" resultMap="Comment">
+    SELECT com_id,questioner,question_date,email,question_content,blog_id FROM comment WHERE com_id = #{_parameter}
+  </select>
+  
+  <select id="queryCommentByBlog" parameterType="int"  resultMap="Comment">
+    SELECT com_id,questioner,question_date,email,question_content,blog_id FROM comment WHERE blog_id = #{_parameter}
+  </select>
+  
+</mapper>

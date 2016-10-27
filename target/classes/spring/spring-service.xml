@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+       <!--扫描所有的Service包，注入IOC中-->
+       <context:component-scan base-package="com.violentstone.service"/>
+
+       <!--配置事物管理器-->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+              <!--注入数据库连接池-->
+              <!--注意这里报错是因为dataSource是在另一个配置文件中的属性，在这里
+                  检索不到，但是我们只要在使用事务管理器的时候，将两个配置文件都
+                  给spring，这样spring就可以检索到dataSource-->
+              <property name="dataSource" ref="dataSource"/>
+       </bean>
+
+       <!--开启事务声明注解,默认使用注解来管理事务行为。
+       在这里我们将proxy-target-class="true"，也就是
+       说我们事务管理的时候基于类的代理将起作用。否则
+       默认使用的就是-->
+       <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+
+</beans>

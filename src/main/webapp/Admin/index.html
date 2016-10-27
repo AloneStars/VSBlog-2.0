@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html dir="ltr" lang="en-US">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Web 2.0 Login Form by Azmind.com</title>
+
+	<!--- CSS --->
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+
+	<!--- Javascript libraries (jQuery and Selectivizr) used for the custom checkbox --->
+
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/selectivizr.js"></script>
+		<noscript><link rel="stylesheet" href="css/fallback.css" /></noscript>
+	<![endif]-->
+
+	</head>
+
+	<body>
+		<div id="container">
+			<form action="" onsubmit="return false;">
+				<div class="login">LOGIN</div>
+				<div class="welcome-text">欢迎登陆暴力的小石头的个人网站,茫茫人海你能来到这个网站也是缘分,但是很可惜我的主人说不能随便让人进入网站内部,所以你得先说出口令才行喔！</div>
+				<div class="username-text">请说出口令:</div>
+				<div class="username-field">
+					<input id="order" type="text" name="order" value="" autocomplete="off"/>
+				</div>
+				<div class="notice-text">小暴暴：对上口令,芝麻开门。对错口令,马上赶人。</div>
+				<input type="button"  value="GO" onclick="checkOrder()"/>
+			</form>
+		</div>
+		<div id="footer">
+			<a href="http://www.violentstone.com/">www.violentStone.com</a>
+		</div>
+	</body>
+
+	<!--js-->
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/SHA.js"></script>
+	<script type="text/javascript" src="js/order.js"></script>
+
+</html>
